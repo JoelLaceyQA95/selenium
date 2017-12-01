@@ -1,0 +1,203 @@
+package QA.Joel;
+
+import static org.junit.Assert.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+
+public class AutoTraderTests {
+	private static ExtentReports report;
+	private WebDriver webDriver;
+	private SpreadSheetReader reader;
+	private List<String> spreadSheetRow;
+	private SignInElements signInElements;
+	private SearchElements searchElements;
+	private ValuationElements valuationElements;
+	
+	private String url1 = "https://www.autotrader.co.uk/";
+	
+	@BeforeClass
+	public static void init() {
+		report = new ExtentReports();
+		String fileName = "MyReport" + ".html";
+		String filePath = System.getProperty("user.dir") + File.separatorChar + fileName;
+		report.attachReporter(new ExtentHtmlReporter(filePath));
+		// System.out.print(filePath);
+	}
+	
+	@Before
+	public void setUp() {
+		webDriver = new ChromeDriver();
+		reader = new SpreadSheetReader((System.getProperty("user.dir")+ File.separatorChar +"autoTraderTest.xlsx"));
+		spreadSheetRow = reader.readRow(1, "AutoTrader");
+		//		 JavascriptExecutor js;
+		//		 if (webDriver instanceof JavascriptExecutor) {
+		//			 js = (JavascriptExecutor)webDriver;
+		//		 }else {
+		//			 throw new IllegalStateException("driver does not support JS");
+		//		 }
+	}
+
+	@After
+	public void tearDown() {
+		webDriver.quit();
+	}
+
+	@AfterClass
+	public static void cleanUp() {
+		report.flush();
+	}
+	
+	@Ignore @Test 
+    public void emailVerificationTest() throws IOException {
+        ExtentTest test = report.createTest("user sign up test");
+        test.log(Status.INFO, "First Test is Starting ");
+        signInElements = PageFactory.initElements(webDriver, SignInElements.class);
+        webDriver.navigate().to(url1);
+        
+        signInElements.clickSignUpHome();
+        signInElements.clickSignUp();
+        String userEmail = spreadSheetRow.get(0);
+        signInElements.userEmail(userEmail);
+        String userPass = spreadSheetRow.get(1);
+        signInElements.userPassword(userEmail);
+        signInElements.submit();
+        
+        
+        
+//        try {
+//        	assertEquals(expectedMessage, endMessage);
+//    		ScreenShot.take(webDriver, "emailVerification");
+//    		test.pass("successful email verified");
+//    		}catch(AssertionError ae) {
+//    			ScreenShot.take(webDriver, "email verification failed");
+//    			test.fail("email failed to verify");
+//    			throw ae;
+//    		}
+    }
+	
+	
+	@Ignore @Test
+	public void searchTest() throws IOException{
+		ExtentTest test = report.createTest("user search test");
+        test.log(Status.INFO, "Second Test is Starting ");
+        webDriver.navigate().to(url1);
+        
+        searchElements = PageFactory.initElements(webDriver, SearchElements.class);
+        String userPostcode = spreadSheetRow.get(2);
+        searchElements.postcode(userPostcode);
+        searchElements.carDistance();
+        searchElements.carMake();
+        try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        searchElements.minPrice();
+        try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        searchElements.maxPrice();
+        searchElements.search();
+        String endMsg = searchElements.breadcrumbs();
+        String expectedMsg = "Search Results";
+        
+        try {
+        	assertEquals(expectedMsg, endMsg);
+        	ScreenShot.take(webDriver, "carSearch");
+        	test.pass("successful search");
+        }catch(AssertionError ae) {
+        	ScreenShot.take(webDriver, "failedSearch");
+        	test.fail("search failed");
+        	throw ae;
+        }
+	}
+        
+        @Test
+        public void valuationTest() throws IOException{
+    		ExtentTest test = report.createTest("valuation test");
+            test.log(Status.INFO, "Third Test is Starting ");
+            webDriver.navigate().to(url1);
+            valuationElements = PageFactory.initElements(webDriver, ValuationElements.class);
+            
+            valuationElements.getValuation();
+            try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            valuationElements.selectMakeModel();
+            try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            valuationElements.selectMake();
+            try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            valuationElements.selectModel();
+            try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            valuationElements.selectDerivative();
+            valuationElements.date();
+            String userMileage = spreadSheetRow.get(3);
+            valuationElements.mileage(userMileage);
+            valuationElements.getValuation();
+            try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            valuationElements.robotCheck();
+            try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            valuationElements.finalSubmit();
+            
+            
+        }
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AutoTraderTests" project="Joel" tests="3" started="3" failures="0" errors="0" ignored="3">
+  <testsuite name="QA.Joel.AutoTraderTests" time="0.0">
+    <testcase name="signUp" classname="QA.Joel.AutoTraderTests" time="0.0" ignored="true"/>
+    <testcase name="searchTest" classname="QA.Joel.AutoTraderTests" time="0.0" ignored="true"/>
+    <testcase name="valuationTest" classname="QA.Joel.AutoTraderTests" time="0.0" ignored="true"/>
+  </testsuite>
+</testrun>

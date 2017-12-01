@@ -1,0 +1,38 @@
+package QA.Joel;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+
+public class ValuationElements {
+	@FindBy(css="body > main > div > section.sell__nav.t-row.cars > a > figure")
+	private WebElement getValuation;
+	
+	@FindBy(css="body > main > div > section.page-hero > div.content-container > div > form > p")
+	private WebElement selectMakeModel;
+	
+	@FindBy(css="#mmMakeSelect")
+	private WebElement make;
+	
+	@FindBy(css="#mmModelSelect")
+	private WebElement model;
+	
+	public void getValuation() {
+		getValuation.click();
+	}
+	
+	public void selectMakeModel() {
+		selectMakeModel.click();
+	}
+	
+	public void selectMake() {
+		Select selectMake = new Select(make);
+		selectMake.selectByIndex(1);
+	}
+	
+	public void selectModel() {
+		Select selectModel = new Select(model);
+		selectModel.selectByIndex(2);
+	}
+
+}

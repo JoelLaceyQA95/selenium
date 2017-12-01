@@ -1,0 +1,14 @@
+package QA.Joel;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class NewCarSearch {
+	@FindBy(css="body > main > div > section.is-non-critical > section.alt-search__nav.t-row > a:nth-child(1) > figure")
+	private WebElement newCarSearch;
+	
+	public void newCarSearch() {
+		newCarSearch.click();
+	}
+
+}

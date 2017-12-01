@@ -1,0 +1,14 @@
+package QA.Joel;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class ValuationElements {
+	@FindBy(css="body > main > div > section.sell__nav.t-row.cars > a > figure")
+	private WebElement getValuation;
+	
+	public void getValuation() {
+		getValuation.click();
+	}
+
+}

@@ -1,0 +1,102 @@
+package QA.Joel;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+
+public class ValuationElements {
+	@FindBy(css="body > main > div > section.sell__nav.t-row.cars > a > figure")
+	private WebElement getValuation;
+	
+	@FindBy(xpath="/html/body/main/div/section[1]/div[2]/div/form/p/a")
+	private WebElement selectMakeModel;
+	
+	@FindBy(css="#mmMakeSelect")
+	private WebElement make;
+	
+	@FindBy(css="#mmModelSelect")
+	private WebElement model;
+	
+	@FindBy(css="#mmDerivativeSelect")
+	private WebElement derivative;
+	
+	@FindBy(css="#mmRegistrationDateEntry")
+	private WebElement date;
+	
+	@FindBy(css="body > div.pickmeup.pmu-view-years > div > div.pmu-years > div.pmu-selected.pmu-button")
+	private WebElement year;
+	
+	@FindBy(css="body > div.pickmeup.pmu-view-months > div > div.pmu-months > div:nth-child(2)")
+	private WebElement month;
+	
+	@FindBy(css="#mmMileageEntry")
+	private WebElement mileage;
+	
+	@FindBy(css="body > main > div > section:nth-child(1) > div > form > button")
+	private WebElement getValuationSubmit;
+	
+	@FindBy(xpath="//*[@id=\"recaptcha-anchor\"]")
+	private WebElement robotCheck;
+	
+	@FindBy(css="body > main > section > div > form > button")
+	private WebElement finalSubmit;
+	
+	public void getValuation() {
+		getValuation.click();
+	}
+	
+	public void selectMakeModel() {
+		selectMakeModel.click();
+	}
+	
+	public void selectMake() {
+		Select selectMake = new Select(make);
+		selectMake.selectByIndex(1);
+	}
+	
+	public void selectModel() {
+		Select selectModel = new Select(model);
+		selectModel.selectByIndex(2);
+	}
+	
+	public void selectDerivative() {
+		Select selectDarivative = new Select(derivative);
+		selectDarivative.selectByIndex(2);
+	}
+	
+	public void date() {
+		date.click();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		year.click();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		month.click();
+	}
+	
+	public void mileage(String userMileage) {
+		mileage.sendKeys(userMileage);
+	}
+	
+	public void valuationSubmit() {
+		getValuationSubmit.click();
+	}
+	
+	public void robotCheck() {
+		robotCheck.click();
+	}
+	
+	public void finalSubmit() {
+		finalSubmit.click();
+	}
+	
+
+}
