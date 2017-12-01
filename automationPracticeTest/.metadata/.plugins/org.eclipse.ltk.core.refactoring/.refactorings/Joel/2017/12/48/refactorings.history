@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;QA.Joel.BrowserFactor&apos; to &apos;BrowserFactory&apos;&#x0D;&#x0A;- Original project: &apos;Joel&apos;&#x0D;&#x0A;- Original element: &apos;QA.Joel.BrowserFactor&apos;&#x0D;&#x0A;- Renamed element: &apos;QA.Joel.BrowserFactory&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;BrowserFactor&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/test\/java&lt;QA.Joel{BrowserFactor.java[BrowserFactor" matchStrategy="1" name="BrowserFactory" qualified="false" references="true" similarDeclarations="false" stamp="1512116729994" textual="false" version="1.0"/>
+</session>

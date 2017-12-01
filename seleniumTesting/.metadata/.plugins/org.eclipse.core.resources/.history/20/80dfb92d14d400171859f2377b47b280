@@ -1,0 +1,19 @@
+package QA.Joel;
+
+public class Test {
+		private WebDriver webdriver;
+		
+		@Before
+		
+		
+		public void setup() {
+			webdriver = new ChromeDriver();
+		}
+		
+		@After
+		
+		public void TearDown() {
+			webdriver.quit();
+		}
+		
+}

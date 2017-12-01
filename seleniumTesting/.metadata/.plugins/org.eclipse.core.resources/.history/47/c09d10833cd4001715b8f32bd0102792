@@ -1,0 +1,47 @@
+package QA.Joel;
+
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
+
+public class Test {
+		private String testString ="http://thedemosite.co.uk/";
+		private WebDriver webdriver;
+		private HomePage home;
+		
+		@Before
+		public void setup() {
+
+			webdriver = new ChromeDriver();
+		}
+		
+		@After
+		public void tearDown() {
+			webdriver.quit();
+		}
+		
+		@org.junit.Test
+		public void test() {
+			webdriver.navigate().to(testString);
+			home = PageFactory.initElements(webdriver, HomePage.class);
+			home.addUserBtn();
+			home.typeUsername("joel");
+			home.typePassword("password");
+			home.submitUser();
+			home.loginTab();
+			home.typeUsername2("joel");
+			home.typePassword2("password");
+			home.loginBtn();
+			
+			String url = webdriver.getCurrentUrl();
+			
+			String expectedUrl = "http://thedemosite.co.uk/login.php/";
+			
+			assertEquals("error", expectedUrl, url);
+		}
+		
+}

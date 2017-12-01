@@ -1,0 +1,46 @@
+package QA.Joel;
+
+import org.junit.After;
+import org.junit.Before;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Test {
+		private String testString ="http://thedemosite.co.uk";
+		private WebDriver webdriver;
+		
+		@Before
+		
+		
+		public void setup() {
+			webdriver = new ChromeDriver();
+		}
+		
+		@After
+		
+		public void tearDown() {
+			webdriver.quit();
+		}
+		
+		@org.junit.Test
+		public void test() {
+			webdriver.navigate().to(testString);
+			WebElement addUser = webdriver.findElement(By.cssSelector("body > div > center > table > tbody > tr:nth-child(2) > td > div > center > table > tbody > tr > td:nth-child(2) > p > small > a:nth-child(6)"));
+			addUser.click();
+			
+			WebElement username = webdriver.findElement(By.cssSelector("body > table > tbody > tr > td.auto-style1 > form > div > center > table > tbody > tr > td:nth-child(1) > div > center > table > tbody > tr:nth-child(1) > td:nth-child(2) > p > input"));
+			username.sendKeys("joel");
+			
+			WebElement password = webdriver.findElement(By.cssSelector("body > table > tbody > tr > td.auto-style1 > form > div > center > table > tbody > tr > td:nth-child(1) > div > center > table > tbody > tr:nth-child(2) > td:nth-child(2) > p > input[type=\"password\"]"));
+			password.sendKeys("password");
+			
+			WebElement submit = webdriver.findElement(By.cssSelector("body > table > tbody > tr > td.auto-style1 > form > div > center > table > tbody > tr > td:nth-child(1) > div > center > table > tbody > tr:nth-child(3) > td:nth-child(2) > p > input[type=\"button\"]"));
+			submit.click();
+			
+			WebElement login = webdriver.findElement(By.cssSelector("body > div > center > table > tbody > tr:nth-child(2) > td > div > center > table > tbody > tr > td:nth-child(2) > p > small > a:nth-child(7)"));
+			login.click();
+		}
+		
+}

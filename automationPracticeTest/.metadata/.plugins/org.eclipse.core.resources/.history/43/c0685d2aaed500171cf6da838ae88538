@@ -1,0 +1,44 @@
+package QA.Joel;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class RegisterUserElements {
+	
+	@FindBy(css="#email_create")
+	private WebElement createAccEmail;
+	
+	@FindBy(css="#SubmitCreate")
+	private WebElement submitEmailBtn;
+	
+	@FindBy(css="#id_gender1")
+	private WebElement genderRadioBtn;
+	
+	@FindBy(css="#customer_firstname")
+	private WebElement firstname;
+	
+	@FindBy(css="#customer_lastname")
+	private WebElement lastname;
+	
+	public void enterEmail(String email) {
+		createAccEmail.sendKeys(email);
+	}
+	
+	public void clickEnterEmailBtn() {
+		submitEmailBtn.click();
+	}
+	
+	public void clickGenderRadio() {
+		genderRadioBtn.click();
+	}
+	
+	public void enterFirstname(String userFirstname) {
+		firstname.sendKeys(userFirstname);
+	}
+	
+	public void enterLastname(String userLastname) {
+		firstname.sendKeys(userLastname);
+	}
+	
+
+}

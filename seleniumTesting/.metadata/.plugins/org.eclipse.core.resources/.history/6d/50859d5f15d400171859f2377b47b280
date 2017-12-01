@@ -1,0 +1,30 @@
+package QA.Joel;
+
+import org.junit.After;
+import org.junit.Before;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Test {
+		private String testString ="http://thedemosite.co.uk";
+		private WebDriver webdriver;
+		
+		@Before
+		
+		
+		public void setup() {
+			webdriver = new ChromeDriver();
+		}
+		
+		@After
+		
+		public void tearDown() {
+			webdriver.quit();
+		}
+		
+		@org.junit.Test
+		public void test() {
+			webdriver.navigate().to(testString);
+		}
+		
+}

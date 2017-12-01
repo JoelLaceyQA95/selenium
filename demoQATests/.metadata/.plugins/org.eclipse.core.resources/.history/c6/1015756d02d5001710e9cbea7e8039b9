@@ -1,0 +1,24 @@
+package Qa.Joel;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class Draggable {
+	@FindBy(css="#draggable")
+	private WebElement defaultDraggableBox;
+	
+	@FindBy(css="#ui-id-1")
+	private WebElement defaultFunctionalityTab;
+	
+	public WebElement getElement() {
+		return defaultDraggableBox;
+	}
+	
+	public int elementXPosition() {
+		return defaultDraggableBox.getLocation().getX();
+	}
+	
+	public WebElement defaultTab() {
+		return defaultFunctionalityTab;
+	}
+}

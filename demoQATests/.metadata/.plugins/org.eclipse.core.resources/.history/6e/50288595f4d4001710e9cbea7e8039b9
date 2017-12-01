@@ -1,0 +1,13 @@
+package Qa.Joel;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class Draggable {
+	@FindBy(css="#draggable")
+	private WebElement defaultDraggableBox;
+	
+	public void xDrag(WebElement element, int xMovement) {
+		element.
+	}
+}

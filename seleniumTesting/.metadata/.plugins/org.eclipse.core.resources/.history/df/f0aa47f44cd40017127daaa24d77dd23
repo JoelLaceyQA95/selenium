@@ -1,0 +1,79 @@
+package QA.Joel;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import org.junit.*;
+import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
+
+import static org.junit.Assert.*;
+
+import java.io.File;
+
+public class ExtentReport {
+
+	private String testString ="http://thedemosite.co.uk";
+    private static ExtentReports report;
+    private WebDriver webDriver;
+	private HomePage home;
+
+
+    @BeforeClass
+    public static void init() {
+        report = new ExtentReports();
+        String fileName = "MyReport" + ".html";
+        String filePath = System.getProperty("user.dir")
+                + File.separatorChar + fileName;
+        report.attachReporter(new ExtentHtmlReporter(filePath));
+        //System.out.print(filePath);
+    }
+
+    @Before
+    public void setUp() {
+        webDriver = new ChromeDriver();
+    }
+
+    @After
+    public void tearDown() {
+        webDriver.quit();
+    }
+
+    @AfterClass
+    public static void cleanUp() {
+        report.flush();
+    }
+
+    @Test
+    public void MyFirstTestReportTest() {
+        ExtentTest test = report.createTest("MyFirstTest");
+        test.log(Status.INFO, "My First Test is Starting ");
+        
+        webDriver.navigate().to(testString);
+		home = PageFactory.initElements(webDriver, HomePage.class);
+		home.addUserBtn();
+		home.typeUsername("joel");
+		home.typePassword("password");
+		home.submitUser();
+		home.loginTab();
+		home.typeUsername2("joel");
+		home.typePassword2("password");
+		home.loginBtn();
+		
+		String loginMessage = home.getLoginMessage();
+		System.out.print(loginMessage);
+		String expectedSuccesfulLogin = "Successful Login";
+		
+		try {
+		assertEquals("error", expectedSuccesfulLogin, loginMessage);
+		test.pass("yay");
+		}catch(AssertionError ae) {
+			test.fail("Boo");
+			throw ae;
+		}
+    }
+
+}

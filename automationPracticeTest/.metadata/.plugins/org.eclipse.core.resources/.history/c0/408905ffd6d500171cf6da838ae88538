@@ -1,0 +1,38 @@
+package QA.Joel;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class OrderItems {
+	@FindBy(xpath="//*[@id=\"homefeatured\"]/li[1]/div/div[1]/div/a[1]/img")
+	private WebElement itemImage;
+	
+	@FindBy(css="#add_to_cart > button")
+	private WebElement addToCartBtn;
+	
+	@FindBy(css="#header > div:nth-child(3) > div > div > div:nth-child(3) > div > a")
+	private WebElement shoppingCartBtn;
+	
+	@FindBy(css="#layer_cart > div.clearfix > div.layer_cart_cart.col-xs-12.col-md-6 > div.button-container > a")
+	private WebElement proceedToCheckout;
+	
+	@FindBy(css="#center_column > p.cart_navigation.clearfix > a.button.btn.btn-default.standard-checkout.button-medium")
+	private WebElement checkoutBtn;
+	
+	public void clickImage() {
+		itemImage.click();
+	}
+	
+	public void clickAddToCart() {
+		addToCartBtn.click();
+	}
+	
+	public void proceedToCheckout() {
+		proceedToCheckout.click();
+	}
+	
+	public void checkout() {
+		checkoutBtn.click();
+	}
+	
+}

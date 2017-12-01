@@ -1,0 +1,8 @@
+package QA.Joel;
+
+public class TestReport {
+	 private String testString ="http://demoqa.com/draggable/";
+	 private static ExtentReports report;
+	 private WebDriver webDriver;
+
+}

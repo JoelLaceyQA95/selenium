@@ -1,0 +1,112 @@
+package Qa.Joel;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+
+public class Tests {
+	 private String testString ="http://demoqa.com/draggable/";
+	 private static ExtentReports report;
+	 private WebDriver webDriver;
+	 private Draggable draggablePage;
+	 //private JavascriptExecutor js;
+	 
+	@BeforeClass
+	public static void init() {
+		report = new ExtentReports();
+		String fileName = "MyReport" + ".html";
+		String filePath = System.getProperty("user.dir") + File.separatorChar + fileName;
+		report.attachReporter(new ExtentHtmlReporter(filePath));
+		// System.out.print(filePath);
+	}
+	
+	@Before
+    public void setUp() {
+        webDriver = new ChromeDriver();
+        JavascriptExecutor js;
+        if (webDriver instanceof JavascriptExecutor) {
+            js = (JavascriptExecutor)webDriver;
+        }else {
+        	throw new IllegalStateException("driver does not support JS");
+        }
+    }
+
+	@After
+    public void tearDown() {
+        webDriver.quit();
+    }
+
+    @AfterClass
+    public static void cleanUp() {
+        report.flush();
+    }
+    
+    @Test
+    public void DefaultDraggableTest() throws IOException {
+        ExtentTest test = report.createTest("DefaultDraggableTest");
+        test.log(Status.INFO, "First Test is Starting ");
+        
+        webDriver.navigate().to(testString);
+        draggablePage = PageFactory.initElements(webDriver, Draggable.class);
+        Actions builder = new Actions(webDriver);
+        
+        draggablePage.defaultTabClick();
+        int defaultPostitionX = draggablePage.elementXPosition();
+        builder.clickAndHold(draggablePage.getDefaultDraggableBox()).moveByOffset(50, 0).release().perform();
+        int finalPosition = draggablePage.elementXPosition();
+        int expectedPosition = defaultPostitionX + 50;
+                                       
+        try {
+        	assertEquals(expectedPosition, finalPosition);
+    		ScreenShot.take(webDriver, "dragSuccess");
+    		test.pass("successful drag test");
+    		}catch(AssertionError ae) {
+    			//ScreenShot.take(webDriver, "loginfailure");
+    			test.fail("test failed");
+    			throw ae;
+    		}
+    }
+    
+    public void ConstraintMovementTest() throws IOException{
+        ExtentTest test = report.createTest("ConstraintMovementTest");
+        test.log(Status.INFO, "Second Test is Starting ");
+        webDriver.navigate().refresh();
+        draggablePage = PageFactory.initElements(webDriver, Draggable.class);
+        Actions builder = new Actions(webDriver);
+        draggablePage.constraintTabClick();
+        int defaultPositionY = draggablePage.elementYPosition();
+        builder.clickAndHold(draggablePage.getVerticalDragBox()).moveByOffset(0, 50).release().perform();
+        int finalPosition = draggablePage.elementYPosition();
+        int expectedPosition = defaultPositionY + 50;
+        
+        try {
+        	assertEquals(expectedPosition, finalPosition);
+    		ScreenShot.take(webDriver, "dragSuccess");
+    		test.pass("successful drag test");
+    		}catch(AssertionError ae) {
+    			//ScreenShot.take(webDriver, "loginfailure");
+    			test.fail("test failed");
+    			throw ae;
+    		}
+        
+        
+        
+    }
+}
